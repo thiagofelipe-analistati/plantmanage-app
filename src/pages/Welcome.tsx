@@ -1,21 +1,22 @@
 import React, {useState}from "react";
-import { Text, View, Image, TouchableOpacity, StyleSheet, SafeAreaView} from "react-native";
+import { Text, View, Image, TouchableOpacity, StyleSheet, SafeAreaView, Dimensions} from "react-native";
 import wateringImg from '../assets/watering.png'
-import { Button } from "../components/button";
 import colors from "../styles/colors";
+import {Feather} from '@expo/vector-icons'
 
 export  function Welcome(){
-
-    const [visible, setVisible] = useState(false);
-    function handleVisible(){
-        setVisible(true)
-    }   
+ 
     return(
         <SafeAreaView style={styles.contanaier}>
             <Text style={styles.title}> Gerencie {'\n'}suas plantas {'\n'}de forma fácil</Text>
-            <Image source={wateringImg} style={styles.image} />
+            <Image source={wateringImg} style={styles.image} resizeMode="contain" />
             <Text style={styles.subtitle}> Não esqueça mais de regar suas plantas, Nós cuidamos de lembrar voce sempre que precisar.</Text>
-            <Button title="Avançar" onPress={handleVisible}/>
+            <TouchableOpacity 
+                style={styles.button} 
+                activeOpacity={0.7}
+            >
+                <Feather  style={styles.buttontext} name="chevron-right" />
+            </TouchableOpacity>
         </SafeAreaView>
     )
 }
@@ -24,7 +25,7 @@ const styles = StyleSheet.create({
     contanaier:{
         flex: 1,
         alignItems: 'center',
-        justifyContent:'space-between'
+        justifyContent:'space-around'
     },
     title:{
         fontSize: 32,
@@ -40,6 +41,9 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20
 
     },
+    image: {
+        height: Dimensions.get('window').width*0.7
+    },
     button: {
         backgroundColor: colors.green,
         justifyContent: 'center',
@@ -49,12 +53,8 @@ const styles = StyleSheet.create({
         height: 56,
         width: 56
     },
-    image: {
-        width: 292,
-        height: 294
-    },
     buttontext: {
         color: colors.white,
-        fontSize: 24
+        fontSize: 24,
     }
 })
